@@ -15,6 +15,15 @@ function reduceToTwoDigits(num) {
     return num;
 }
 
+// Hàm lấy ngày hiện tại
+function getCurrentDate() {
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
 // Hàm thêm hiệu ứng loading
 function showLoading() {
     const resultDiv = document.getElementById('result');
@@ -49,13 +58,17 @@ function decodeDream() {
         const dreamText = dreamInput.value.toLowerCase();
         const number = stringToNumber(dreamText);
         const result = reduceToTwoDigits(number);
+        const currentDate = getCurrentDate();
         
         // Thêm hiệu ứng typing
         resultDiv.innerHTML = `
             <div class="dream-details">
                 <p><i class="fas fa-dream"></i> Điều bạn mơ thấy: <strong>${dreamInput.value}</strong></p>
-                <p><i class="fas fa-hashtag"></i> Con số giải mã: <strong>${result}</strong></p>
-                <p class="interpretation"><i class="fas fa-lightbulb"></i> Gợi ý: Con số ${result} có thể mang đến may mắn cho bạn trong thời gian tới!</p>
+                <p><i class="fas fa-calendar"></i> Ngày: <strong>${currentDate}</strong></p>
+                <p><i class="fas fa-hashtag"></i> Con số may mắn: <strong>${String(result).padStart(2, '0')}</strong></p>
+                <p class="interpretation">
+                    <i class="fas fa-lightbulb"></i> Gợi ý: Con số ${String(result).padStart(2, '0')} có thể là 2 số cuối của giải đặc biệt XSMB ngày ${currentDate}
+                </p>
             </div>
         `;
         
